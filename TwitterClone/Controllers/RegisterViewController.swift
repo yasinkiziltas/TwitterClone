@@ -73,7 +73,6 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    
     func makeAlert(title: String, message: String) {
         let alert = UIAlertController(title: "Oops!", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
