@@ -60,7 +60,23 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
-        if emailField.text != "" && passwordField.text != "" {
+        if nameField.text != "" && emailField.text != "" && passwordField.text != "" && birthdayField.text != "" {
+            
+            let firestoreDatabase = Firestore.firestore()
+            var firestoreRef: DocumentReference? = nil
+            let fireStoreUser = ["name" : nameField.text!, "email" : emailField.text!, "birthDay" : birthdayField.text!, "signUpDate" : FieldValue.serverTimestamp(), "profilePic" : ""] as [String : Any]
+            
+            firestoreRef = firestoreDatabase
+                .collection("Users")
+                .addDocument(data: fireStoreUser, completion: { (error)  in
+                     
+                    if error != nil {
+                        self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "Error")
+                    } else {
+                        
+                    }
+                })
+            
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
                 if error != nil {
                     self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
