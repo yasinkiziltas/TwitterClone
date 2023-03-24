@@ -333,13 +333,25 @@
             </objects>
             <point key="canvasLocation" x="942" y="739"/>
         </scene>
-        <!--View Controller-->
+        <!--Profile View Controller-->
         <scene sceneID="gWW-rI-Hst">
             <objects>
-                <viewController id="RcO-Yt-y2o" sceneMemberID="viewController">
+                <viewController id="RcO-Yt-y2o" customClass="ProfileViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="MRi-tr-f4w">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZBG-14-DW1">
+                                <rect key="frame" x="163" y="431" width="90" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="gray" title="Sign Out"/>
+                                <connections>
+                                    <action selector="btnSignOut:" destination="RcO-Yt-y2o" eventType="touchUpInside" id="ybu-DD-Itn"/>
+                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="toSplashScreen" modalPresentationStyle="fullScreen" id="kql-Rr-3od"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="v5l-wO-ppB"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
@@ -347,7 +359,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AVe-rb-9gJ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3436" y="1509"/>
+            <point key="canvasLocation" x="2926" y="1509"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Vib-dq-eAQ">
@@ -363,12 +375,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mlu-In-H7d" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1916" y="1519"/>
+            <point key="canvasLocation" x="941" y="1509"/>
         </scene>
-        <!--View Controller-->
+        <!--Home View Controller-->
         <scene sceneID="viM-ZA-Mb9">
             <objects>
-                <viewController id="Whb-WB-piw" sceneMemberID="viewController">
+                <viewController id="Whb-WB-piw" customClass="HomeViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8S9-EL-Whp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -395,7 +407,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UbJ-6p-yJH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2717" y="1509"/>
+            <point key="canvasLocation" x="1916" y="1523"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="sdC-sN-ZUv">
@@ -426,20 +438,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFF-id-63P">
-                                <rect key="frame" x="27" y="741" width="361" height="52"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="umO-qL-Fb5"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleColor" systemColor="opaqueSeparatorColor"/>
-                                </state>
-                                <connections>
-                                    <action selector="goNext:" destination="JRC-aj-t9X" eventType="touchUpInside" id="5rO-pW-O4O"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a profile picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2V-wK-RMX">
                                 <rect key="frame" x="20" y="122" width="257" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
@@ -483,13 +481,27 @@
                                     <segue destination="kxJ-Rp-4e9" kind="presentation" identifier="toHomeFromProfilePic" modalPresentationStyle="fullScreen" id="lUs-9a-5Ll"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EFF-id-63P">
+                                <rect key="frame" x="27" y="729" width="361" height="52"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="umO-qL-Fb5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="Next">
+                                    <color key="titleColor" systemColor="labelColor"/>
+                                </state>
+                                <connections>
+                                    <action selector="goNext:" destination="JRC-aj-t9X" eventType="touchUpInside" id="5rO-pW-O4O"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Cma-oK-594"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="AT2-LV-gzE" firstAttribute="bottom" secondItem="Cma-oK-594" secondAttribute="bottom" constant="-20" id="1m1-aU-5GE"/>
                             <constraint firstItem="hhV-0d-RSn" firstAttribute="centerX" secondItem="0hS-h6-uhb" secondAttribute="centerX" id="21x-68-tXg"/>
-                            <constraint firstItem="AT2-LV-gzE" firstAttribute="top" secondItem="EFF-id-63P" secondAttribute="bottom" constant="-4" id="2td-DV-Fri"/>
+                            <constraint firstItem="AT2-LV-gzE" firstAttribute="top" secondItem="EFF-id-63P" secondAttribute="bottom" constant="8" id="2td-DV-Fri"/>
                             <constraint firstItem="f2V-wK-RMX" firstAttribute="leading" secondItem="qlS-Qd-auC" secondAttribute="leadingMargin" id="6vf-SH-PJ2"/>
                             <constraint firstItem="0hS-h6-uhb" firstAttribute="top" secondItem="qlS-Qd-auC" secondAttribute="top" constant="333" id="IDa-kq-Wwk"/>
                             <constraint firstItem="AT2-LV-gzE" firstAttribute="leading" secondItem="Cma-oK-594" secondAttribute="leading" constant="140" id="K0c-II-uqS"/>
@@ -537,7 +549,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="L07-py-Dxf"/>
+        <segue reference="lUs-9a-5Ll"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="apple" width="30" height="30"/>

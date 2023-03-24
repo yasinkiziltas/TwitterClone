@@ -10,6 +10,7 @@
 		17B66A9F9C369604D0599A29 /* Pods_TwitterCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996BE3B76FD0F3918BD1FD34 /* Pods_TwitterCloneTests.framework */; };
 		8DC4EE2B29C4E15300C1E316 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4EE2A29C4E15300C1E316 /* HomeViewController.swift */; };
 		8DC4EE2D29C4E75700C1E316 /* AddProfilePictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DC4EE2C29C4E75700C1E316 /* AddProfilePictureViewController.swift */; };
+		8DE0301629CBA52300AD69DE /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE0301529CBA52300AD69DE /* ProfileViewController.swift */; };
 		8DF2FDEA29C30B0700729ED3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2FDE929C30B0700729ED3 /* AppDelegate.swift */; };
 		8DF2FDEC29C30B0700729ED3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2FDEB29C30B0700729ED3 /* SceneDelegate.swift */; };
 		8DF2FDEE29C30B0700729ED3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DF2FDED29C30B0700729ED3 /* ViewController.swift */; };
@@ -49,6 +50,7 @@
 		345BBE4D7E8096840D16DC32 /* Pods-TwitterClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterClone.release.xcconfig"; path = "Target Support Files/Pods-TwitterClone/Pods-TwitterClone.release.xcconfig"; sourceTree = "<group>"; };
 		8DC4EE2A29C4E15300C1E316 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8DC4EE2C29C4E75700C1E316 /* AddProfilePictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddProfilePictureViewController.swift; sourceTree = "<group>"; };
+		8DE0301529CBA52300AD69DE /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		8DF2FDE629C30B0700729ED3 /* TwitterClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TwitterClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8DF2FDE929C30B0700729ED3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8DF2FDEB29C30B0700729ED3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 				8DC4EE2A29C4E15300C1E316 /* HomeViewController.swift */,
 				8DF2FDE929C30B0700729ED3 /* AppDelegate.swift */,
 				8DF2FDEB29C30B0700729ED3 /* SceneDelegate.swift */,
+				8DE0301529CBA52300AD69DE /* ProfileViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -468,6 +471,7 @@
 				8DC4EE2D29C4E75700C1E316 /* AddProfilePictureViewController.swift in Sources */,
 				8DF2FE2829C3400800729ED3 /* LoginViewController.swift in Sources */,
 				8DF2FE2629C33FF800729ED3 /* RegisterViewController.swift in Sources */,
+				8DE0301629CBA52300AD69DE /* ProfileViewController.swift in Sources */,
 				8DC4EE2B29C4E15300C1E316 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

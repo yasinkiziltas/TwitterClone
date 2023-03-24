@@ -40,7 +40,28 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
     }
 
     @IBAction func goNext(_ sender: Any) {
-        
+        // Giriş yapan kullanıcının UID'sini alın
+        guard let currentUserUid = Auth.auth().currentUser?.uid else {
+            print("Kullanıcı giriş yapmamış")
+            return
+        }
+
+        // Firestore veritabanı referansı oluşturun
+        let db = Firestore.firestore()
+
+        // Güncellenecek belge referansını alın
+        let docRef = db.collection("Users").document(currentUserUid)
+
+        // Belgenin sadece "name" alanını güncelleyin
+        docRef.updateData([
+            "profilePic": "test.jpg"
+        ]) { error in
+            if let error = error {
+                print("Belge güncellenirken bir hata oluştu: \(error.localizedDescription)")
+            } else {
+                print("Belge başarıyla güncellendi")
+            }
+        }
     }
     
     @IBAction func btnSkip(_ sender: Any) {
