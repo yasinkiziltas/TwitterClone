@@ -25,6 +25,8 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
         
         let imgTapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(chooseImg))
         imgView.addGestureRecognizer(imgTapGestureRecognizer)
+        
+        //getUsers()
     }
     
     @objc func chooseImg() {
@@ -33,35 +35,57 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
         pickerController.sourceType = .photoLibrary
         present(pickerController, animated: true)
     }
-    
+     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         imgView.image = info[.originalImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func goNext(_ sender: Any) {
-        // Giriş yapan kullanıcının UID'sini alın
-        guard let currentUserUid = Auth.auth().currentUser?.uid else {
-            print("Kullanıcı giriş yapmamış")
-            return
-        }
-
-        // Firestore veritabanı referansı oluşturun
-        let db = Firestore.firestore()
-
-        // Güncellenecek belge referansını alın
-        let docRef = db.collection("Users").document(currentUserUid)
-
-        // Belgenin sadece "name" alanını güncelleyin
-        docRef.updateData([
-            "profilePic": "test.jpg"
-        ]) { error in
-            if let error = error {
-                print("Belge güncellenirken bir hata oluştu: \(error.localizedDescription)")
-            } else {
-                print("Belge başarıyla güncellendi")
+        let storage = Storage.storage()
+        let storageRef = storage.reference()
+        
+        let mediaFolder = storageRef.child("media")
+        
+        if let data = imgView.image?.jpegData(compressionQuality: 0.5) {
+            
+            let uuid = UUID().uuidString
+            
+            let imageReferance = mediaFolder.child("\(uuid).jpg")
+            imageReferance.putData(data, metadata: nil) { (metadata, error) in
+                
+                if error != nil {
+                    self.makeAlert(titleInput: "Error!", messageInput: error?.localizedDescription ?? "Error")
+                } else {
+                    
+                    imageReferance.downloadURL{ (url, error) in
+                        if error == nil {
+                            let imageURL = url?.absoluteString
+                            
+                            //Database
+                            let firestoreDatabase = Firestore.firestore()
+                            var firestoreRef: DocumentReference? = nil
+                            let firestorePost = ["imageURL" : imageURL!, "email": Auth.auth().currentUser!.email, "addedDate": FieldValue.serverTimestamp()] as [String: Any]
+                            
+                            firestoreRef = firestoreDatabase.collection("UserProfileImages").addDocument(data: firestorePost, completion: { (error) in
+                                if error != nil {
+                                    self.makeAlert(titleInput: "ERROR", messageInput: error?.localizedDescription ?? "Error")
+                                } else {
+                                    self.performSegue(withIdentifier: "toHomeFromProfilePic", sender: nil)
+                                }
+                            })
+                        }
+                    }
+                }
             }
         }
+    }
+    
+    func makeAlert(titleInput: String, messageInput: String ) {
+        let alert = UIAlertController(title: titleInput, message: messageInput, preferredStyle: .alert)
+        let okBtn = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okBtn)
+        self.present(alert, animated: true)
     }
     
     @IBAction func btnSkip(_ sender: Any) {
