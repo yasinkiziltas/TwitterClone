@@ -25,5 +25,9 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Need to open camera</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Need to open camera library</string>
 </dict>
 </plist>

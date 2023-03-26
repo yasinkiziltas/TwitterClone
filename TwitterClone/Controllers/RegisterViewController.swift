@@ -15,16 +15,28 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var birthdayField: UITextField!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     let datePicker = UIDatePicker()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         createDatePicker()
+        stopSpinner()
         
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
         self.emailField.keyboardType = .emailAddress
+    }
+    
+    func startSpinner() {
+        spinner.startAnimating()
+    }
+    
+    func stopSpinner() {
+        spinner.hidesWhenStopped = true
+        spinner.stopAnimating()
     }
     
     @objc func hideKeyboard() {
@@ -60,16 +72,21 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
+        startSpinner()
+        
         if nameField.text != "" && emailField.text != "" && passwordField.text != "" && birthdayField.text != "" {
-            
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
                 if error != nil {
+                    self.stopSpinner()
                     self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
                 } else {
+                    self.stopSpinner()
                     self.performSegue(withIdentifier: "toProfilePicVC", sender: nil)
                 }
             }
+            
         } else {
+            self.stopSpinner()
             self.makeAlert(title: "Error!", message: "Mail or password must a value!")
         }
             
@@ -82,6 +99,7 @@ class RegisterViewController: UIViewController {
                 .addDocument(data: fireStoreUser, completion: { (error)  in
                      
                     if error != nil {
+                        self.stopSpinner()
                         self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "Error")
                     } else {
                         
@@ -94,5 +112,4 @@ class RegisterViewController: UIViewController {
         alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
-    
 }

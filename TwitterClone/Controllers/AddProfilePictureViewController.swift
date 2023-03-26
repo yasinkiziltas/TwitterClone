@@ -12,9 +12,12 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
 
     @IBOutlet weak var btnNext: UIButton!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var mySpinner: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        stopSpinner()
         
         btnNext.layer.cornerRadius = 25
         btnNext.layer.borderWidth = 0.1
@@ -29,7 +32,17 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
         //getUsers()
     }
     
+    func startSpinner() {
+        mySpinner.startAnimating()
+    }
+    
+    func stopSpinner() {
+        mySpinner.hidesWhenStopped = true
+        mySpinner.stopAnimating()
+    }
+    
     @objc func chooseImg() {
+        startSpinner()
         let pickerController = UIImagePickerController()
         pickerController.delegate = self
         pickerController.sourceType = .photoLibrary
@@ -37,11 +50,13 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
     }
      
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        stopSpinner()
         imgView.image = info[.originalImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
     }
 
     @IBAction func goNext(_ sender: Any) {
+        startSpinner()
         let storage = Storage.storage()
         let storageRef = storage.reference()
         
@@ -55,6 +70,7 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
             imageReferance.putData(data, metadata: nil) { (metadata, error) in
                 
                 if error != nil {
+                    self.stopSpinner()
                     self.makeAlert(titleInput: "Error!", messageInput: error?.localizedDescription ?? "Error")
                 } else {
                     
@@ -69,6 +85,7 @@ class AddProfilePictureViewController: UIViewController, UIImagePickerController
                             
                             firestoreRef = firestoreDatabase.collection("UserProfileImages").addDocument(data: firestorePost, completion: { (error) in
                                 if error != nil {
+                                    self.stopSpinner()
                                     self.makeAlert(titleInput: "ERROR", messageInput: error?.localizedDescription ?? "Error")
                                 } else {
                                     self.performSegue(withIdentifier: "toHomeFromProfilePic", sender: nil)
