@@ -25,15 +25,23 @@ class LoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+    func makeAlert(title: String, message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: title, style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func btnLogin(_ sender: Any) {
         if txtEmail.text != "" && txtPassword.text != "" {
-            Auth.auth().signIn(withEmail: txtEmail.text!, password: txtPassword.text!) { (data, error) in
+            Auth.auth().signIn(withEmail: txtEmail.text!, password: txtPassword.text!) {(data, error) in
                 if error != nil {
-                    print(error?.localizedDescription)
+                    self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "")
                 } else {
-                    self.performSegue(withIdentifier: "toMainVC", sender: nil)
+                    self.performSegue(withIdentifier: "toHomeFromLogin", sender: self)
                 }
             }
+        } else {
+            self.makeAlert(title: "Ops!", message: "Username/Password?")
         }
     }
 }

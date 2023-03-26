@@ -62,6 +62,17 @@ class RegisterViewController: UIViewController {
     @IBAction func btnSignUp(_ sender: Any) {
         if nameField.text != "" && emailField.text != "" && passwordField.text != "" && birthdayField.text != "" {
             
+            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
+                if error != nil {
+                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
+                } else {
+                    self.performSegue(withIdentifier: "toProfilePicVC", sender: nil)
+                }
+            }
+        } else {
+            self.makeAlert(title: "Error!", message: "Mail or password must a value!")
+        }
+            
             let firestoreDatabase = Firestore.firestore()
             var firestoreRef: DocumentReference? = nil
             let fireStoreUser = ["name" : nameField.text!, "email" : emailField.text!, "birthDay" : birthdayField.text!, "signUpDate" : FieldValue.serverTimestamp(), "profilePic" : ""] as [String : Any]
@@ -76,17 +87,6 @@ class RegisterViewController: UIViewController {
                         
                     }
                 })
-            
-            Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
-                if error != nil {
-                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
-                } else {
-                    self.performSegue(withIdentifier: "toProfilePicVC", sender: nil)
-                }
-            }
-        } else {
-            self.makeAlert(title: "Error!", message: "Mail or password must a value!")
-        }
     }
     
     func makeAlert(title: String, message: String) {

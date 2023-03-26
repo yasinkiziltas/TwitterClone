@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="TV2-J6-ePX">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
@@ -13,44 +13,44 @@
             <objects>
                 <viewController id="HUF-Ny-0QF" customClass="RegisterViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bg2-zF-XjB">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twtter" translatesAutoresizingMaskIntoConstraints="NO" id="c5z-fw-uTy">
-                                <rect key="frame" x="182" y="48" width="40" height="29"/>
+                                <rect key="frame" x="182" y="84" width="40" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="W8T-DB-qvH"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Create your account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vqa-6R-83b">
-                                <rect key="frame" x="28" y="158" width="256" height="33"/>
+                                <rect key="frame" x="28" y="194" width="256" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="g93-21-HB4">
-                                <rect key="frame" x="36" y="261" width="340" height="34"/>
+                                <rect key="frame" x="36" y="297" width="340" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Xxv-5q-6Wz">
-                                <rect key="frame" x="36" y="310" width="340" height="34"/>
+                                <rect key="frame" x="36" y="346" width="340" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7UN-ab-AWo">
-                                <rect key="frame" x="36" y="359" width="340" height="34"/>
+                                <rect key="frame" x="36" y="395" width="340" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register to our system!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hyo-3k-lc8">
-                                <rect key="frame" x="28" y="180" width="168" height="48"/>
+                                <rect key="frame" x="28" y="216" width="168" height="48"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <color key="textColor" systemColor="opaqueSeparatorColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Date of birth.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hNI-T1-qwr">
-                                <rect key="frame" x="36" y="408" width="340" height="34"/>
+                                <rect key="frame" x="36" y="444" width="340" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
@@ -63,11 +63,10 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="btnSignUp:" destination="HUF-Ny-0QF" eventType="touchUpInside" id="l5l-cj-MwD"/>
-                                    <segue destination="JRC-aj-t9X" kind="show" identifier="toProfilePicVC" id="wDX-sF-MYP"/>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="bOz-lY-t8l">
-                                <rect key="frame" x="37" y="450" width="340" height="267"/>
+                                <rect key="frame" x="37" y="486" width="340" height="267"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <string key="text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</string>
@@ -108,11 +107,12 @@
                         <outlet property="emailField" destination="Xxv-5q-6Wz" id="ifn-BP-iyN"/>
                         <outlet property="nameField" destination="g93-21-HB4" id="syQ-UG-145"/>
                         <outlet property="passwordField" destination="7UN-ab-AWo" id="R48-mS-dSh"/>
+                        <segue destination="JRC-aj-t9X" kind="show" identifier="toProfilePicVC" id="cLa-Zk-9zJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsF-nT-r2V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2926.0869565217395" y="-25.446428571428569"/>
+            <point key="canvasLocation" x="2826.0869565217395" y="-46.205357142857139"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -189,7 +189,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="registerBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CH4-Kl-WSp"/>
-                                    <segue destination="KfG-NW-F8q" kind="show" identifier="toRegister" id="nBY-0B-kuk"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Have a account?" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YO6-SO-0z8">
@@ -206,7 +205,6 @@
                                 <buttonConfiguration key="configuration" style="plain" title="Login"/>
                                 <connections>
                                     <action selector="loginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="gqh-eT-Rav"/>
-                                    <segue destination="45p-fn-AGl" kind="show" identifier="toLogin" id="kt3-Fk-Suf"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -245,18 +243,20 @@
                         <outlet property="btnApple" destination="8nw-tn-c72" id="QEx-Le-Tdc"/>
                         <outlet property="btnGoogle" destination="BPC-cd-j4j" id="F5g-VS-uGE"/>
                         <outlet property="imageView" destination="EsM-01-oAv" id="qMF-qZ-W9P"/>
+                        <segue destination="45p-fn-AGl" kind="show" identifier="toLogin" id="UHF-Od-Zsj"/>
+                        <segue destination="HUF-Ny-0QF" kind="show" identifier="toRegister" id="cMe-FV-fdc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941" y="-25"/>
+            <point key="canvasLocation" x="1850.7246376811595" y="-46.205357142857139"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="Pbh-EE-QpU">
             <objects>
                 <viewController id="45p-fn-AGl" customClass="LoginViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="AvB-3u-rtr">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="twtter" translatesAutoresizingMaskIntoConstraints="NO" id="DRI-OP-Mu1">
@@ -265,20 +265,6 @@
                                     <constraint firstAttribute="height" constant="32" id="2W1-qQ-UdV"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7lW-8N-JuM">
-                                <rect key="frame" x="58" y="760" width="299" height="47"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="8px-ca-3Uj"/>
-                                </constraints>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="filled" title="Login">
-                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="21"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="btnLogin:" destination="45p-fn-AGl" eventType="touchUpInside" id="YAi-Fv-fIT"/>
-                                    <segue destination="kxJ-Rp-4e9" kind="presentation" identifier="toMainVC" modalPresentationStyle="fullScreen" id="L07-py-Dxf"/>
-                                </connections>
-                            </button>
                             <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HBG-ST-cRr">
                                 <rect key="frame" x="37" y="370" width="340" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -301,6 +287,17 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RFj-wl-PyL">
+                                <rect key="frame" x="69" y="762" width="276" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="filled" title="Login">
+                                    <fontDescription key="titleFontDescription" type="boldSystem" pointSize="22"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnLogin:" destination="45p-fn-AGl" eventType="touchUpInside" id="vWX-F3-zzh"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NnZ-GR-vES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -309,16 +306,13 @@
                             <constraint firstItem="HBG-ST-cRr" firstAttribute="trailing" secondItem="cIU-o9-O5l" secondAttribute="trailing" id="P1E-Iu-2kt"/>
                             <constraint firstItem="DRI-OP-Mu1" firstAttribute="leading" secondItem="NnZ-GR-vES" secondAttribute="leading" constant="177" id="U5W-yP-d3h"/>
                             <constraint firstItem="LiO-5j-l1q" firstAttribute="leading" secondItem="HBG-ST-cRr" secondAttribute="leading" id="Uoy-dd-IQ9"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="7lW-8N-JuM" secondAttribute="bottom" constant="-3" id="V2n-L7-53r"/>
                             <constraint firstItem="DRI-OP-Mu1" firstAttribute="top" secondItem="NnZ-GR-vES" secondAttribute="top" constant="68" id="Zko-va-OUv"/>
                             <constraint firstItem="HBG-ST-cRr" firstAttribute="top" secondItem="LiO-5j-l1q" secondAttribute="bottom" constant="29" id="ajI-Y6-xGf"/>
                             <constraint firstItem="vLJ-VH-3wd" firstAttribute="top" secondItem="AvB-3u-rtr" secondAttribute="top" constant="283" id="bsH-n6-nmi"/>
                             <constraint firstItem="vLJ-VH-3wd" firstAttribute="leading" secondItem="LiO-5j-l1q" secondAttribute="leading" id="cji-mc-qn6"/>
                             <constraint firstItem="DRI-OP-Mu1" firstAttribute="centerX" secondItem="AvB-3u-rtr" secondAttribute="centerX" id="h2Q-Xp-aaD"/>
                             <constraint firstItem="DRI-OP-Mu1" firstAttribute="centerX" secondItem="HBG-ST-cRr" secondAttribute="centerX" id="has-Tn-NYv"/>
-                            <constraint firstItem="cIU-o9-O5l" firstAttribute="centerX" secondItem="7lW-8N-JuM" secondAttribute="centerX" id="mIj-6j-qXX"/>
                             <constraint firstItem="cIU-o9-O5l" firstAttribute="top" secondItem="HBG-ST-cRr" secondAttribute="bottom" constant="30" id="nnP-zY-QxY"/>
-                            <constraint firstItem="7lW-8N-JuM" firstAttribute="leading" secondItem="NnZ-GR-vES" secondAttribute="leading" constant="58" id="ph1-AT-sCl"/>
                             <constraint firstItem="LiO-5j-l1q" firstAttribute="top" secondItem="vLJ-VH-3wd" secondAttribute="bottom" constant="8" id="qm7-Sh-3uO"/>
                             <constraint firstItem="vLJ-VH-3wd" firstAttribute="leading" secondItem="NnZ-GR-vES" secondAttribute="leading" constant="37" id="xCt-4q-YxV"/>
                         </constraints>
@@ -331,7 +325,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cCI-IO-42j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="942" y="739"/>
+            <point key="canvasLocation" x="940.57971014492762" y="738.61607142857144"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="gWW-rI-Hst">
@@ -348,7 +342,6 @@
                                 <buttonConfiguration key="configuration" style="gray" title="Sign Out"/>
                                 <connections>
                                     <action selector="btnSignOut:" destination="RcO-Yt-y2o" eventType="touchUpInside" id="ybu-DD-Itn"/>
-                                    <segue destination="BYZ-38-t0r" kind="presentation" identifier="toSplashScreen" modalPresentationStyle="fullScreen" id="kql-Rr-3od"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -388,6 +381,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <tabBarItem key="tabBarItem" image="text.bubble" catalog="system" id="lQT-uq-BNQ"/>
+                    <navigationItem key="navigationItem" id="Uzs-km-8Ym"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xND-qH-6qs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -435,17 +429,17 @@
             <objects>
                 <viewController id="JRC-aj-t9X" customClass="AddProfilePictureViewController" customModule="TwitterClone" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qlS-Qd-auC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="838"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick a profile picture" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2V-wK-RMX">
-                                <rect key="frame" x="20" y="122" width="257" height="33"/>
+                                <rect key="frame" x="20" y="158" width="257" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="27"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have a favorite selfie? Upload it now" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q5T-Uv-UId">
-                                <rect key="frame" x="20" y="163" width="257" height="30"/>
+                                <rect key="frame" x="20" y="199" width="257" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="hC6-Yx-SaD"/>
                                 </constraints>
@@ -460,13 +454,13 @@
                                 </constraints>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="twtter" translatesAutoresizingMaskIntoConstraints="NO" id="hhV-0d-RSn">
-                                <rect key="frame" x="187" y="73" width="40" height="29"/>
+                                <rect key="frame" x="187" y="109" width="40" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="94j-ZH-aFM"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AT2-LV-gzE">
-                                <rect key="frame" x="140" y="789" width="135" height="29"/>
+                                <rect key="frame" x="140" y="813" width="135" height="29"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="29" id="Dgs-Ba-bWz"/>
                                 </constraints>
@@ -526,31 +520,27 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8N8-I1-qsX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3979.7101449275365" y="-25.446428571428569"/>
+            <point key="canvasLocation" x="3744.9275362318845" y="-46.205357142857139"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="806-aF-Fiu">
+        <scene sceneID="oP7-1T-hYV">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KfG-NW-F8q" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="TV2-J6-ePX" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="ZEc-a6-41F"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="kmd-kP-Y4V">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Tvi-2Y-gVv">
+                        <rect key="frame" x="0.0" y="48" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="HUF-Ny-0QF" kind="relationship" relationship="rootViewController" id="muF-TN-Hdj"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="fdz-jY-MfQ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="H1s-Od-Xcb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="f9y-cs-WKk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2015.9420289855075" y="-25.446428571428569"/>
+            <point key="canvasLocation" x="940.57971014492762" y="-46.205357142857139"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="L07-py-Dxf"/>
-    </inferredMetricsTieBreakers>
     <resources>
         <image name="apple" width="30" height="30"/>
         <image name="bell.fill" catalog="system" width="123" height="128"/>
