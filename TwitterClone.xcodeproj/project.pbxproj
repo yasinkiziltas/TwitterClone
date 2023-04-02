@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		17B66A9F9C369604D0599A29 /* Pods_TwitterCloneTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 996BE3B76FD0F3918BD1FD34 /* Pods_TwitterCloneTests.framework */; };
+		8D8F588129D381C6007D18B8 /* AddTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D8F588029D381C6007D18B8 /* AddTweetViewController.swift */; };
 		8DB3C32829D0D6EB00B7926D /* AlertsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB3C32729D0D6EB00B7926D /* AlertsViewController.swift */; };
 		8DB3C32A29D0D6FD00B7926D /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB3C32929D0D6FD00B7926D /* MessagesViewController.swift */; };
 		8DB3C32C29D0DB4300B7926D /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DB3C32B29D0DB4300B7926D /* FeedCell.swift */; };
@@ -51,6 +52,7 @@
 		1549B096540B5484DC0DF163 /* Pods-TwitterCloneTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterCloneTests.debug.xcconfig"; path = "Target Support Files/Pods-TwitterCloneTests/Pods-TwitterCloneTests.debug.xcconfig"; sourceTree = "<group>"; };
 		31A5D8053FFD7A3FFA64D5D6 /* Pods_TwitterClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		345BBE4D7E8096840D16DC32 /* Pods-TwitterClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterClone.release.xcconfig"; path = "Target Support Files/Pods-TwitterClone/Pods-TwitterClone.release.xcconfig"; sourceTree = "<group>"; };
+		8D8F588029D381C6007D18B8 /* AddTweetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTweetViewController.swift; sourceTree = "<group>"; };
 		8DB3C32729D0D6EB00B7926D /* AlertsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertsViewController.swift; sourceTree = "<group>"; };
 		8DB3C32929D0D6FD00B7926D /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		8DB3C32B29D0DB4300B7926D /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				8DE0301529CBA52300AD69DE /* ProfileViewController.swift */,
 				8DB3C32729D0D6EB00B7926D /* AlertsViewController.swift */,
 				8DB3C32929D0D6FD00B7926D /* MessagesViewController.swift */,
+				8D8F588029D381C6007D18B8 /* AddTweetViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D8F588129D381C6007D18B8 /* AddTweetViewController.swift in Sources */,
 				8DB3C32A29D0D6FD00B7926D /* MessagesViewController.swift in Sources */,
 				8DF2FDEE29C30B0700729ED3 /* ViewController.swift in Sources */,
 				8DF2FDEA29C30B0700729ED3 /* AppDelegate.swift in Sources */,

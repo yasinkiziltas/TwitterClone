@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -21,7 +22,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return 10
+    }
+    
+    @IBAction func btnAddTweet(_ sender: Any) {
+        performSegue(withIdentifier: "toAddTweetVC", sender: self)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
