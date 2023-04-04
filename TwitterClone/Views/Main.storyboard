@@ -583,19 +583,38 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="BZr-5K-6kt">
-                                <rect key="frame" x="20" y="63" width="376" height="142"/>
+                                <rect key="frame" x="20" y="63" width="374" height="258"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <color key="textColor" systemColor="labelColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gK3-pj-T8m">
+                                <rect key="frame" x="33" y="770" width="55" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="photo" catalog="system"/>
+                                <connections>
+                                    <action selector="btnSelectPhoto:" destination="K4U-eM-oXZ" eventType="touchUpInside" id="i5g-MS-5bs"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nzv-Dc-iRi">
+                                <rect key="frame" x="20" y="313" width="374" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lmf-Fs-DSd">
+                                <rect key="frame" x="197" y="514" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="gFk-bY-fYi"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="seW-z6-xzG"/>
                     <connections>
+                        <outlet property="imgView" destination="nzv-Dc-iRi" id="aUS-wz-TiR"/>
+                        <outlet property="spinner" destination="lmf-Fs-DSd" id="hGK-3u-Vw3"/>
                         <outlet property="tweetArea" destination="BZr-5K-6kt" id="ACd-Ll-c6G"/>
                     </connections>
                 </viewController>
@@ -774,6 +793,7 @@
         <image name="google" width="32" height="32"/>
         <image name="heart" catalog="system" width="128" height="107"/>
         <image name="person" catalog="system" width="128" height="121"/>
+        <image name="photo" catalog="system" width="128" height="93"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="shuffle" catalog="system" width="128" height="95"/>
         <image name="square.and.pencil" catalog="system" width="128" height="113"/>
