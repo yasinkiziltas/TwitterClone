@@ -56,16 +56,19 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         self.dismiss(animated: true ,completion: nil)
     }
     
-    
     @IBAction func btnAccessibility(_ sender: Any) {
-        
+        makeAlert(titleInput: "OK", messageInput: "Building..")
+    }
+    
+    @IBAction func btnReply(_ sender: Any) {
+        makeAlert(titleInput: "OK", messageInput: "Building..")
     }
     
     @IBAction func btnTweet(_ sender: Any) {
         startSpinner()
         
         if tweetArea.text?.isEmpty ?? true {
-            makeAlert(titleInput: "Ops!", messageInput: "You must enter a tweet!")
+            makeAlert(titleInput: "OK", messageInput: "You must enter a tweet!")
         } else {
         if imgView.image == nil {
             let firestoreDB = Firestore.firestore()
