@@ -11,9 +11,11 @@ import FirebaseAuth
 
 class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    @IBOutlet weak var btnAccesibility: UIButton!
     @IBOutlet weak var tweetArea: UITextView!
-    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
     let placeholderLabel = UILabel()
     
     override func viewDidLoad() {
@@ -21,10 +23,14 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         tweetArea.delegate = self
         view.addSubview(tweetArea)
         
+        btnAccesibility.backgroundColor = .clear
+        btnAccesibility.layer.cornerRadius = 15
+        
+        
         imgView.isUserInteractionEnabled = true
         stopSpinner()
         
-        placeholderLabel.text = "Write something.."
+        placeholderLabel.text = "What happened?"
         placeholderLabel.font = tweetArea.font // metin giriş kutusuyla aynı font
         placeholderLabel.sizeToFit()
         tweetArea.addSubview(placeholderLabel)
@@ -50,8 +56,17 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         self.dismiss(animated: true ,completion: nil)
     }
     
+    
+    @IBAction func btnAccessibility(_ sender: Any) {
+        
+    }
+    
     @IBAction func btnTweet(_ sender: Any) {
         startSpinner()
+        
+        if tweetArea.text?.isEmpty ?? true {
+            makeAlert(titleInput: "Ops!", messageInput: "You must enter a tweet!")
+        } else {
         if imgView.image == nil {
             let firestoreDB = Firestore.firestore()
             var firestoreRf: DocumentReference? = nil
@@ -109,6 +124,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
             }
         }
     }
+}
     
     @IBAction func btnSelectPhoto(_ sender: Any) {
         let pickerController = UIImagePickerController()
