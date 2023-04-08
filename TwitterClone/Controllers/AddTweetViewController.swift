@@ -16,7 +16,9 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
     let placeholderLabel = UILabel()
+    let currentUser = Auth.auth().currentUser?.uid
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +75,8 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         if imgView.image == nil {
             let firestoreDB = Firestore.firestore()
             var firestoreRf: DocumentReference? = nil
+            
+           
             let firestorePostWithoutImg = ["imageURL" : "", "postedBy": Auth.auth().currentUser!.email, "tweetContent": self.tweetArea.text!, "tweetDate": FieldValue.serverTimestamp(), "likes" : 0] as [String: Any]
             
             firestoreRf = firestoreDB.collection("Tweets").addDocument(data: firestorePostWithoutImg, completion: { (error) in
@@ -80,6 +84,16 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                     self.stopSpinner()
                     self.makeAlert(titleInput: "ERROR", messageInput: error?.localizedDescription ?? "Error")
                 } else {
+                    let existingCollectionRef = firestoreDB.collection("Tweets")
+                    let existingDocRef = existingCollectionRef.document(firestoreRf?.documentID ?? "")
+
+                    let newSubcollectionRef = existingDocRef.collection("tweetLikes")
+                    let newSubdocumentRef = newSubcollectionRef.document()
+
+                    newSubdocumentRef.setData([
+                        "userID": "",
+                        "timestamp": ""
+                    ])
                     self.dismiss(animated: true, completion: nil)
                     self.stopSpinner()
                 }
@@ -116,6 +130,16 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                                         self.stopSpinner()
                                         self.makeAlert(titleInput: "ERROR", messageInput: error?.localizedDescription ?? "Error")
                                     } else {
+                                        let existingCollectionRef = firestoreDatabase.collection("Tweets")
+                                        let existingDocRef = existingCollectionRef.document(firestoreRef?.documentID ?? "")
+
+                                        let newSubcollectionRef = existingDocRef.collection("tweetLikes")
+                                        let newSubdocumentRef = newSubcollectionRef.document()
+
+                                        newSubdocumentRef.setData([
+                                            "userID": "",
+                                            "timestamp": ""
+                                        ])
                                         self.dismiss(animated: true, completion: nil)
                                         self.stopSpinner()
                                     }

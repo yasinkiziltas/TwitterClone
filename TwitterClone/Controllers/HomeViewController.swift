@@ -12,6 +12,7 @@ import SDWebImage
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    var documentIdArray = [String]()
     var userEmailArray = [String]()
     var userTweetArray = [String]()
     var userTweetLikeArray = [Int]()
@@ -30,14 +31,22 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func getDataFromFirebase() {
         let firestoreDatabase = Firestore.firestore()
         
-        firestoreDatabase.collection("Tweets").addSnapshotListener { (snapshot, error ) in
+        firestoreDatabase.collection("Tweets")
+            .order(by: "tweetDate", descending: true)
+            .addSnapshotListener { (snapshot, error ) in
             if error != nil {
                 print(error?.localizedDescription)
             } else {
                 if snapshot?.isEmpty != true {
+                    self.documentIdArray.removeAll(keepingCapacity: false)
+                    self.userTweetArray.removeAll(keepingCapacity: false)
+                    self.userEmailArray.removeAll(keepingCapacity: false)
+                    self.userTweetImgArray.removeAll(keepingCapacity: false)
+                    self.userTweetLikeArray.removeAll(keepingCapacity: false)
+                    
                     for document in snapshot!.documents {
                       let documentID = document.documentID
-                        print(documentID)
+                        self.documentIdArray.append(documentID)
                         
                         if let tweetContent = document.get("tweetContent") as? String {
                             self.userTweetArray.append(tweetContent)
@@ -72,6 +81,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FeedCell
+        cell.documentIdLabel.text = documentIdArray[indexPath.row]
         cell.postedbyName.text = "Twitter User"
         cell.postedByEmail.text =  userEmailArray[indexPath.row]
         cell.profileImg.image = UIImage(named: "apple.png")
