@@ -7,9 +7,11 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 
 class FeedCell: UITableViewCell {
 
+    @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var documentIdLabel: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
     @IBOutlet weak var postImg: UIImageView!
@@ -20,80 +22,109 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var retweetLabel: UILabel!
     
     var isLiked = false
+    var isItLiked = false
     let currentUserEmail = Auth.auth().currentUser?.email
     let currentUserID = Auth.auth().currentUser?.uid
     
+    let image = UIImage(systemName: "heart")
+    let imageFill = UIImage(systemName: "heart.fill")
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        likeBtn.setImage(image, for: .normal)
     }
 
-    @IBAction func retweetBtnClicked(_ sender: Any) {
-        
-    }
-    
     @IBAction func likeBtnClicked(_ sender: Any) {
         let db = Firestore.firestore()
         let tweetRef = db.collection("Tweets").document(documentIdLabel.text!)
         let likesRef = tweetRef.collection("tweetLikes")
         
+        // Kullanıcının "Like" butonuna tekrar tıkladığında
         if isLiked {
-                // Kullanıcının "Like" butonuna tekrar tıkladığında
-            if let likeCount = Int(likeLabel.text!) {
-                let likeStore = ["likes" : likeCount - 1] as [String : Any]
-                
-                if likeStore.count != 0 {
-                    db.collection("Tweets").document(documentIdLabel.text!).setData(likeStore, merge: true)
+            
+            //İlgili document bulma işlemi
+            likesRef.whereField("userID", isEqualTo: currentUserID).getDocuments { (snapshot, error) in
+                if let error = error {
+                    print("Error removing like: \(error)")
                 } else {
-                    let likeStore = ["likes" : 0] as [String : Any]
-                    db.collection("Tweets").document(documentIdLabel.text!).setData(likeStore, merge: true)
+                    
+                    //Tweets içersinideki likes countunu artırma işlemi
+                    if let likeCount = Int(self.likeLabel.text!) {
+                        let likeStore = ["likes" : likeCount - 1] as [String : Any]
+                        
+                        if likeStore.count != 0 {
+                            db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
+                        } else {
+                            let likeStore = ["likes" : 0] as [String : Any]
+                            db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
+                        }
+                    }
+                    
+                    //Document silme işlemi
+                    guard let snapshot = snapshot else { return }
+                    for document in snapshot.documents {
+                        let data = document.data()
+                        self.isItLiked = data["isLiked"] as? Bool ?? false
+                        print(self.isItLiked)
+                        document.reference.delete()
+                    }
                 }
             }
-                likesRef.whereField("userID", isEqualTo: currentUserID).getDocuments { (snapshot, error) in
+            
+            likeBtn.setImage(image, for: .normal)
+            isLiked = false
+            
+            //Kullanıcının "Like" butonuna ilk kez tıkladığında
+        } else {
+            
+            //tweetLikes dizisi oluşturma işlemi
+            let likeData: [String: Any] = [
+                "userEmail" : currentUserEmail,
+                "userID": currentUserID,
+                "timestamp": FieldValue.serverTimestamp(),
+                "isLiked" : true
+            ]
+            
+            //tweetLikes dizisini firebase'e ekleme işlemi
+            likesRef.addDocument(data: likeData) { error in
+                if let error = error {
+                    print("Error adding like: \(error)")
+                } else {
+                    if let likeCount = Int(self.likeLabel.text!) {
+                        let likeStore = ["likes" : likeCount + 1] as [String : Any]
+                        db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
+                    }
+                }
+                
+                likesRef.whereField("userID", isEqualTo: self.currentUserID).getDocuments { (snapshot, error) in
                     if let error = error {
                         print("Error removing like: \(error)")
                     } else {
                         guard let snapshot = snapshot else { return }
                         for document in snapshot.documents {
-                            document.reference.delete()
+                            let data = document.data()
+                            let isItLiked = data["isLiked"] as? Bool ?? false
+                            print(isItLiked)
+                           
                         }
                     }
                 }
-                
-                isLiked = false
-                // Butonun rengini değiştirin veya benzeri bir geri bildirim yapın
-            
-            //Kullanıcının "Like" butonuna ilk kez tıkladığında
-            } else {
-                if let likeCount = Int(likeLabel.text!) {
-                    let likeStore = ["likes" : likeCount + 1] as [String : Any]
-                    db.collection("Tweets").document(documentIdLabel.text!).setData(likeStore, merge: true)
-                }
-                let likeData: [String: Any] = [
-                    "userEmail" : currentUserEmail,
-                    "userID": currentUserID,
-                    "timestamp": FieldValue.serverTimestamp()
-                ]
-                
-                likesRef.addDocument(data: likeData) { error in
-                    if let error = error {
-                        print("Error adding like: \(error)")
-                    }
-                }
-                
-                isLiked = true
-                // Butonun rengini değiştirin veya benzeri bir geri bildirim yapın
+                self.isLiked = true
             }
-          
-        
+            
+        }
     }
     
     @IBAction func commendBtnClicked(_ sender: Any) {
         
     }
     
+    
+    @IBAction func retweetBtnClicked(_ sender: Any) {
+        
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-
 }

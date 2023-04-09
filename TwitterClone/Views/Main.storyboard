@@ -451,7 +451,7 @@
                                                     </constraints>
                                                     <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="heart" catalog="system"/>
+                                                    <buttonConfiguration key="configuration" style="plain"/>
                                                     <connections>
                                                         <action selector="likeBtnClicked:" destination="gwF-jm-tN9" eventType="touchUpInside" id="mbm-pH-wSQ"/>
                                                     </connections>
@@ -533,6 +533,7 @@
                                         <connections>
                                             <outlet property="commentLabel" destination="H0S-Vt-bYT" id="ze8-LJ-6Y7"/>
                                             <outlet property="documentIdLabel" destination="QV1-nM-sd0" id="U1P-az-63A"/>
+                                            <outlet property="likeBtn" destination="mh5-GQ-zFm" id="kgE-Ar-Mrf"/>
                                             <outlet property="likeLabel" destination="C9j-5g-PTw" id="Hpo-fE-f1C"/>
                                             <outlet property="postImg" destination="IO6-te-4Aw" id="bhx-ob-Hae"/>
                                             <outlet property="postedByEmail" destination="4jE-im-PIE" id="C4S-4i-qsM"/>
@@ -865,7 +866,6 @@
         <image name="cursorarrow.click.2" catalog="system" width="128" height="125"/>
         <image name="globe" catalog="system" width="128" height="123"/>
         <image name="google" width="32" height="32"/>
-        <image name="heart" catalog="system" width="128" height="107"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
         <image name="list.star" catalog="system" width="128" height="95"/>
         <image name="location.north.circle.fill" catalog="system" width="128" height="123"/>

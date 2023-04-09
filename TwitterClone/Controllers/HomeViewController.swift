@@ -18,10 +18,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var userTweetLikeArray = [Int]()
     var userTweetImgArray = [String]()
     
+    let firestoreDatabase = Firestore.firestore()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+      
         self.navigationItem.setHidesBackButton(true, animated: true)
         
         getDataFromFirebase()
@@ -29,8 +33,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func getDataFromFirebase() {
-        let firestoreDatabase = Firestore.firestore()
-        
         firestoreDatabase.collection("Tweets")
             .order(by: "tweetDate", descending: true)
             .addSnapshotListener { (snapshot, error ) in
