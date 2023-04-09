@@ -64,8 +64,6 @@ class FeedCell: UITableViewCell {
                     guard let snapshot = snapshot else { return }
                     for document in snapshot.documents {
                         let data = document.data()
-                        self.isItLiked = data["isLiked"] as? Bool ?? false
-                        print(self.isItLiked)
                         document.reference.delete()
                     }
                 }
@@ -103,9 +101,9 @@ class FeedCell: UITableViewCell {
                         guard let snapshot = snapshot else { return }
                         for document in snapshot.documents {
                             let data = document.data()
-                            let isItLiked = data["isLiked"] as? Bool ?? false
-                            print(isItLiked)
-                           
+                            //let isItLiked = data["isLiked"] as? Bool ?? false
+                            //print(isItLiked)
+                            print(data)
                         }
                     }
                 }
