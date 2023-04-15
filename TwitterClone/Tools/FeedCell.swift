@@ -31,6 +31,7 @@ class FeedCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
         likeBtn.setImage(image, for: .normal)
     }
 
@@ -59,6 +60,14 @@ class FeedCell: UITableViewCell {
                             db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
                         }
                     }
+
+//                    likesRef.updateData(["isLiked": false]) { error in
+//                      if let error = error {
+//                       print("Error updating document: \(error.localizedDescription)")
+//                      } else {
+//                        print("Document successfully updated")
+//                      }
+//                    }
                     
                     //Document silme işlemi
                     guard let snapshot = snapshot else { return }
@@ -72,7 +81,8 @@ class FeedCell: UITableViewCell {
             likeBtn.setImage(image, for: .normal)
             isLiked = false
             
-            //Kullanıcının "Like" butonuna ilk kez tıkladığında
+            
+        //Kullanıcının "Like" butonuna ilk kez tıkladığında
         } else {
             
             //tweetLikes dizisi oluşturma işlemi
@@ -82,34 +92,34 @@ class FeedCell: UITableViewCell {
                 "timestamp": FieldValue.serverTimestamp(),
                 "isLiked" : true
             ]
+ 
             
-            //tweetLikes dizisini firebase'e ekleme işlemi
-            likesRef.addDocument(data: likeData) { error in
+            likesRef.whereField("userID", isEqualTo: currentUserID).getDocuments { (snapshot, error) in
                 if let error = error {
-                    print("Error adding like: \(error)")
-                } else {
-                    if let likeCount = Int(self.likeLabel.text!) {
-                        let likeStore = ["likes" : likeCount + 1] as [String : Any]
-                        db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
-                    }
+                    print("Belgeleri alma hatası: \(error.localizedDescription)")
+                    return
                 }
                 
-                likesRef.whereField("userID", isEqualTo: self.currentUserID).getDocuments { (snapshot, error) in
-                    if let error = error {
-                        print("Error removing like: \(error)")
-                    } else {
-                        guard let snapshot = snapshot else { return }
-                        for document in snapshot.documents {
-                            let data = document.data()
-                            //let isItLiked = data["isLiked"] as? Bool ?? false
-                            //print(isItLiked)
-                            print(data)
+                if let snapshot = snapshot, snapshot.documents.count > 0 {
+                    print("Kullanıcı zaten bir belge ekledi.")
+                } else {
+                    self.likeBtn.setImage(self.imageFill, for: .normal)
+                    
+                    //tweetLikes dizisini firebase'e ekleme işlemi
+                    likesRef.addDocument(data: likeData) { error in
+                        if let error = error {
+                            print("Error adding like: \(error)")
+                        } else {
+                            if let likeCount = Int(self.likeLabel.text!) {
+                                let likeStore = ["likes" : likeCount + 1] as [String : Any]
+                                db.collection("Tweets").document(self.documentIdLabel.text!).setData(likeStore, merge: true)
+                            }
                         }
-                    }
                 }
+            }
+                //self.likeBtn.setImage(self.imageFill, for: .normal)
                 self.isLiked = true
             }
-            
         }
     }
     
