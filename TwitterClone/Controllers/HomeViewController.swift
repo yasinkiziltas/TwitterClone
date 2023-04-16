@@ -84,6 +84,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! FeedCell
         cell.documentIdLabel.text = documentIdArray[indexPath.row]
+        let documentID = documentIdArray[indexPath.row]
+        cell.configureCell(documentID: documentID)
         cell.postedbyName.text = "Twitter User"
         cell.postedByEmail.text =  userEmailArray[indexPath.row]
         cell.profileImg.image = UIImage(named: "apple.png")
