@@ -9,9 +9,11 @@ import UIKit
 import Firebase
 import FirebaseFirestore
 import FirebaseCore
+import SkeletonView
 
 class FeedCell: UITableViewCell {
-
+    static let identifier = "FeedCell"
+    
     @IBOutlet weak var likeBtn: UIButton!
     @IBOutlet weak var documentIdLabel: UILabel!
     @IBOutlet weak var profileImg: UIImageView!
@@ -32,7 +34,6 @@ class FeedCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         likeBtn.setImage(self.image, for: .normal)
-        //getTweetLikeStatus()
     }
     
     func configureCell(documentID: String) {
@@ -60,7 +61,6 @@ class FeedCell: UITableViewCell {
         }
     }
     
-     
     @IBAction func likeBtnClicked(_ sender: Any) {
         let tweetRef = db.collection("Tweets").document(documentIdLabel.text!)
         let likesRef = tweetRef.collection("tweetLikes")
