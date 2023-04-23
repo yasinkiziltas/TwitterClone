@@ -86,6 +86,7 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.isSkeletonable = true
+        //tableView.showSkeleton(usingColor: .concrete, transition: .crossDissolve(0.25))
         tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .gray), animation: nil, transition: .crossDissolve(0.25))
     }
     

@@ -10,7 +10,7 @@ import Firebase
 import FirebaseAuth
 
 class LoginViewController: UIViewController {
-
+    
     @IBOutlet weak var txtEmail: UITextField!
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var mySpinner: UIActivityIndicatorView!
@@ -43,13 +43,30 @@ class LoginViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    
     @IBAction func btnLogin(_ sender: Any) {
         startSpinner()
         if txtEmail.text != "" && txtPassword.text != "" {
             Auth.auth().signIn(withEmail: txtEmail.text!, password: txtPassword.text!) {(data, error) in
-                if error != nil {
-                    self.stopSpinner()
-                    self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "")
+                if let error = error as NSError? {
+                    switch AuthErrorCode.Code(rawValue: error.code) {
+                        
+                    case .invalidEmail:
+                        self.makeAlert(title: "Hata", message: "Geçersiz e-posta adresi.")
+                        self.stopSpinner()
+                        
+                    case .wrongPassword:
+                        self.makeAlert(title: "Hata", message: "Parola hatalı!")
+                        self.stopSpinner()
+                        
+                    case .userNotFound:
+                        self.makeAlert(title: "Hata", message: "Sistemde böyle bir kullanıcı yok!")
+                        self.stopSpinner()
+                        
+                    default:
+                        self.makeAlert(title: "Hata", message: "Giriş işlemi sırasında bir hata oluştu. Parola veya şifre yanlış olabilir.")
+                        self.stopSpinner()
+                    }
                 } else {
                     self.performSegue(withIdentifier: "toHomeFromLogin", sender: self)
                 }

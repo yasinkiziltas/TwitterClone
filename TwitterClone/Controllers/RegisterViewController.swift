@@ -76,18 +76,36 @@ class RegisterViewController: UIViewController {
         
         if nameField.text != "" && emailField.text != "" && passwordField.text != "" && birthdayField.text != "" {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
-                if error != nil {
-                    self.stopSpinner()
-                    self.makeAlert(title: "Error", message: error?.localizedDescription ?? "Error")
+                if let error = error as NSError? {
+                    if let errorCode = AuthErrorCode.Code (rawValue: error.code) {
+                        switch errorCode {
+                            
+                        case .weakPassword:
+                            self.makeAlert(title: "Hata", message: "Parola en az 6 karakter olmalıdır..")
+                            self.stopSpinner()
+                            
+                        case .emailAlreadyInUse:
+                            self.makeAlert(title: "Hata", message: "Bu mail adresi zaten kullanımda..")
+                            self.stopSpinner()
+                            
+                        case .invalidEmail:
+                            self.makeAlert(title: "Hata", message: "Yanlış email formatı!")
+                            self.stopSpinner()
+                            
+                        default:
+                            self.makeAlert(title: "Hata", message: "Bir hata oluştu. Lütfen tekrar deneyin.")
+                            self.stopSpinner()
+                        }
+                    }
                 } else {
-                    self.stopSpinner()
                     self.performSegue(withIdentifier: "toProfilePicVC", sender: nil)
+                    self.stopSpinner()
                 }
             }
             
         } else {
+            self.makeAlert(title: "Error!", message: "Tüm alanlar zorunludur!")
             self.stopSpinner()
-            self.makeAlert(title: "Error!", message: "Mail or password must a value!")
         }
             
             let firestoreDatabase = Firestore.firestore()
