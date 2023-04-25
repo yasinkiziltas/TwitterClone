@@ -73,38 +73,59 @@ class RegisterViewController: UIViewController {
     }
     
     @IBAction func btnSignUp(_ sender: Any) {
+        let firestoreDatabase = Firestore.firestore()
+        var firestoreRef: DocumentReference? = nil
         startSpinner()
         
-        if  nameField.text != "" &&
-            emailField.text != "" &&
-            passwordField.text != "" &&
-            userNameField.text != "" &&
-            birthdayField.text != ""
-        {
+        if nameField.text != "" && emailField.text != "" && passwordField.text != "" && userNameField.text != "" &&  birthdayField.text != "" {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
                 if let error = error as NSError? {
-                    if let errorCode = AuthErrorCode.Code (rawValue: error.code) {
-                        switch errorCode {
-                            
-                        case .weakPassword:
-                            self.makeAlert(title: "Hata", message: "Parola en az 6 karakter olmalıdır..")
-                            self.stopSpinner()
-                            
-                        case .emailAlreadyInUse:
-                            self.makeAlert(title: "Hata", message: "Bu mail adresi zaten kullanımda..")
-                            self.stopSpinner()
-                            
-                        case .invalidEmail:
-                            self.makeAlert(title: "Hata", message: "Yanlış email formatı!")
-                            self.stopSpinner()
-                            
-                        default:
-                            self.makeAlert(title: "Hata", message: "Bir hata oluştu. Lütfen tekrar deneyin.")
-                            self.stopSpinner()
-                        }
+                    switch AuthErrorCode.Code(rawValue: error.code) {
+                        
+                    case .weakPassword:
+                        self.makeAlert(title: "Hata", message: "Parola en az 6 karakter olmalıdır..")
+                        self.stopSpinner()
+                        
+                    case .emailAlreadyInUse:
+                        self.makeAlert(title: "Hata", message: "Bu mail adresi zaten kullanımda..")
+                        self.stopSpinner()
+                        
+                    case .invalidEmail:
+                        self.makeAlert(title: "Hata", message: "Yanlış email formatı!")
+                        self.stopSpinner()
+                        
+                    default:
+                        self.makeAlert(title: "Hata", message: "Bir hata oluştu. Lütfen tekrar deneyin.")
+                        self.stopSpinner()
+                     
                     }
-                } else {
+                } else if let authdata = authdata {
+                    
+                    let fireStoreUser = [
+                        "name" : self.nameField.text!,
+                        "email" : self.emailField.text!,
+                        "userName": self.userNameField.text!,
+                        "birthDay" : self.birthdayField.text!,
+                        "signUpDate" : FieldValue.serverTimestamp(),
+                        "profilePic" : ""] as [String : Any]
+                    
+                    firestoreRef = firestoreDatabase
+                        .collection("Users")
+                        .addDocument(data: fireStoreUser, completion: { (error)  in
+                             
+                            if error != nil {
+                                self.stopSpinner()
+                                self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "Error")
+                            } else {
+                                
+                            }
+                        })
+                    
                     self.performSegue(withIdentifier: "toProfilePicVC", sender: nil)
+                    self.stopSpinner()
+                    
+                } else {
+                    print("Bir hata oluştu. Lütfen tekrar deneyin.")
                     self.stopSpinner()
                 }
             }
@@ -113,28 +134,6 @@ class RegisterViewController: UIViewController {
             self.makeAlert(title: "Error!", message: "Tüm alanlar zorunludur!")
             self.stopSpinner()
         }
-            
-            let firestoreDatabase = Firestore.firestore()
-            var firestoreRef: DocumentReference? = nil
-            let fireStoreUser = [
-                             "name" : nameField.text!,
-                             "email" : emailField.text!,
-                             "userName": userNameField.text!,
-                             "birthDay" : birthdayField.text!,
-                             "signUpDate" : FieldValue.serverTimestamp(),
-                             "profilePic" : ""] as [String : Any]
-            
-            firestoreRef = firestoreDatabase
-                .collection("Users")
-                .addDocument(data: fireStoreUser, completion: { (error)  in
-                     
-                    if error != nil {
-                        self.stopSpinner()
-                        self.makeAlert(title: "Ops!", message: error?.localizedDescription ?? "Error")
-                    } else {
-                        
-                    }
-                })
     }
     
     func makeAlert(title: String, message: String) {

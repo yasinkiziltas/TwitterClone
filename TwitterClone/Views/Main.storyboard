@@ -79,6 +79,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l9m-9R-bzk">
+                                <rect key="frame" x="36" y="493" width="340" height="34"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mBv-oJ-BhP"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -113,12 +119,13 @@
                         <outlet property="nameField" destination="g93-21-HB4" id="syQ-UG-145"/>
                         <outlet property="passwordField" destination="7UN-ab-AWo" id="R48-mS-dSh"/>
                         <outlet property="spinner" destination="Gak-gj-GZP" id="Y36-Vk-7t7"/>
-                        <segue destination="JRC-aj-t9X" kind="show" identifier="toProfilePicVC" id="cLa-Zk-9zJ"/>
+                        <outlet property="userNameField" destination="l9m-9R-bzk" id="xgG-tL-Azd"/>
+                        <segue destination="JRC-aj-t9X" kind="show" identifier="toProfilePicVC" id="RcO-eI-e6j"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DsF-nT-r2V" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2835" y="-5"/>
+            <point key="canvasLocation" x="2834.7826086956525" y="-5.3571428571428568"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -875,7 +882,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="lUs-9a-5Ll"/>
+        <segue reference="Z7i-FD-SyJ"/>
         <segue reference="euc-sy-ykZ"/>
     </inferredMetricsTieBreakers>
     <resources>
