@@ -15,6 +15,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
     @IBOutlet weak var birthdayField: UITextField!
+    @IBOutlet weak var userNameField: UITextField!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     let datePicker = UIDatePicker()
@@ -74,7 +75,12 @@ class RegisterViewController: UIViewController {
     @IBAction func btnSignUp(_ sender: Any) {
         startSpinner()
         
-        if nameField.text != "" && emailField.text != "" && passwordField.text != "" && birthdayField.text != "" {
+        if  nameField.text != "" &&
+            emailField.text != "" &&
+            passwordField.text != "" &&
+            userNameField.text != "" &&
+            birthdayField.text != ""
+        {
             Auth.auth().createUser(withEmail: emailField.text!, password: passwordField.text!) { (authdata, error) in
                 if let error = error as NSError? {
                     if let errorCode = AuthErrorCode.Code (rawValue: error.code) {
@@ -110,7 +116,13 @@ class RegisterViewController: UIViewController {
             
             let firestoreDatabase = Firestore.firestore()
             var firestoreRef: DocumentReference? = nil
-            let fireStoreUser = ["name" : nameField.text!, "email" : emailField.text!, "birthDay" : birthdayField.text!, "signUpDate" : FieldValue.serverTimestamp(), "profilePic" : ""] as [String : Any]
+            let fireStoreUser = [
+                             "name" : nameField.text!,
+                             "email" : emailField.text!,
+                             "userName": userNameField.text!,
+                             "birthDay" : birthdayField.text!,
+                             "signUpDate" : FieldValue.serverTimestamp(),
+                             "profilePic" : ""] as [String : Any]
             
             firestoreRef = firestoreDatabase
                 .collection("Users")
