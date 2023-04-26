@@ -140,7 +140,6 @@ class FeedCell: UITableViewCell {
         
     }
     
-    
     @IBAction func retweetBtnClicked(_ sender: Any) {
         
     }

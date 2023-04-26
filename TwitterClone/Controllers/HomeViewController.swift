@@ -15,6 +15,7 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
     @IBOutlet weak var tableView: UITableView!
     var documentIdArray = [String]()
     var userEmailArray = [String]()
+    var userNameArray = [String]()
     var userTweetArray = [String]()
     var userTweetLikeArray = [Int]()
     var userTweetImgArray = [String]()
@@ -28,7 +29,6 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
         self.navigationItem.setHidesBackButton(true, animated: true)
         tableView.rowHeight = 400
         tableView.estimatedRowHeight = 350
-        //tableView.delegate = self
         tableView.dataSource = self
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
@@ -37,12 +37,15 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
             }
             self.tableView.stopSkeletonAnimation()
             self.view.hideSkeleton(reloadDataAfter: true, transition: .crossDissolve(0.25))
-            self.getDataFromFirebase()
             self.tableView.reloadData()
         })
+        getDataFromFirebase()
     }
     
     func getDataFromFirebase() {
+        tableView.isSkeletonable = true
+        tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .gray), animation: nil, transition: .crossDissolve(0.25))
+        
            firestoreDatabase.collection("Tweets")
                .order(by: "tweetDate", descending: true)
                .addSnapshotListener { (snapshot, error ) in
@@ -76,19 +79,13 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
                                self.userTweetImgArray.append(imageUrl)
                            }
                        }
-                       
                        self.tableView.reloadData()
+                   } else {
+                       print("Snapshot is empty")
                    }
                }
            }
        }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        tableView.isSkeletonable = true
-        //tableView.showSkeleton(usingColor: .concrete, transition: .crossDissolve(0.25))
-        tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .gray), animation: nil, transition: .crossDissolve(0.25))
-    }
     
     @IBAction func btnAddTweet(_ sender: Any) {
         performSegue(withIdentifier: "toAddTweetVC", sender: self)
@@ -109,13 +106,12 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
             cell.documentIdLabel.text = documentIdArray[indexPath.row]
             let documentID = documentIdArray[indexPath.row]
             cell.configureCell(documentID: documentID)
-            cell.postedbyName.text = "Twitter User"
-            cell.postedByEmail.text =  userEmailArray[indexPath.row]
+            cell.postedbyName.text = "User"
+            cell.postedByEmail.text = "@\(userEmailArray[indexPath.row])"
             cell.profileImg.image = UIImage(named: "apple.png")
             cell.postImg.sd_setImage(with: URL(string: self.userTweetImgArray[indexPath.row]))
             cell.commentLabel.text = userTweetArray[indexPath.row]
             cell.likeLabel.text = String(userTweetLikeArray[indexPath.row])
-          
         }
         return cell
       
