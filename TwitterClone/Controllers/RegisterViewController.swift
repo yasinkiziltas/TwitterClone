@@ -29,6 +29,11 @@ class RegisterViewController: UIViewController {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGestureRecognizer)
         self.emailField.keyboardType = .emailAddress
+        checkDate()
+    }
+    
+    func checkDate() {
+      
     }
     
     func startSpinner() {
@@ -64,11 +69,23 @@ class RegisterViewController: UIViewController {
     }
     
     @objc func donePressed() {
+        let currentDate = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
         self.birthdayField.text = dateFormatter.string(from:datePicker.date)
+        dateFormatter.dateFormat = "dd.MM.yyyy" // Doğum tarihinizin formatına uygun şekilde burayı ayarlayın
+        guard let birthday = dateFormatter.date(from: birthdayField.text ?? "") else {
+            self.makeAlert(title: "Ops!", message: "Geçersiz format!")
+            return
+        }
+
+        if birthday > currentDate {
+            self.makeAlert(title: "Ops!", message: "Uyarı: Doğum tarihi bugünden daha ileri bir tarihtir.")
+            birthdayField.text = ""
+        }
+        
         self.view.endEditing(true)
     }
     
