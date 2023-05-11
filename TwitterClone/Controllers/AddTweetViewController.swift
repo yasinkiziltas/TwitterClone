@@ -19,9 +19,13 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
     
     let placeholderLabel = UILabel()
     let currentUser = Auth.auth().currentUser?.uid
+    let cUser = Auth.auth().currentUser
+    var currentUserName = ""
+    var currentUserNickName = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getUserInfo()
         tweetArea.delegate = self
         view.addSubview(tweetArea)
         
@@ -66,6 +70,29 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         makeAlert(titleInput: "OK", messageInput: "Building..")
     }
     
+    func getUserInfo() {
+        let db = Firestore.firestore()
+        let usersRef = db.collection("Users")
+        let tweetRef = db.collection("Tweets")
+        
+        usersRef.getDocuments{(querySnapshot, error) in
+            if let error = error {
+                print(error.localizedDescription)
+            } else {
+                for document in querySnapshot!.documents {
+                    let userEmail = document.get("email") as! String
+                    
+                    if self.cUser?.email == userEmail {
+                        let cUserName = document.get("name") as! String
+                        let cUserNickName = document.get("userName") as! String
+                        self.currentUserNickName = cUserNickName
+                        self.currentUserName = cUserName
+                    }
+                }
+            }
+        }
+    }
+    
     @IBAction func btnTweet(_ sender: Any) {
         startSpinner()
         
@@ -77,7 +104,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
             var firestoreRf: DocumentReference? = nil
             
            
-            let firestorePostWithoutImg = ["imageURL" : "", "postedBy": Auth.auth().currentUser!.email, "tweetContent": self.tweetArea.text!, "tweetDate": FieldValue.serverTimestamp(), "likes" : 0] as [String: Any]
+            let firestorePostWithoutImg = ["imageURL" : "", "postedByName" : currentUserName, "postedByEmail": Auth.auth().currentUser!.email, "postedByNickName": currentUserNickName, "tweetContent": self.tweetArea.text!, "tweetDate": FieldValue.serverTimestamp(), "likes" : 0] as [String: Any]
             
             firestoreRf = firestoreDB.collection("Tweets").addDocument(data: firestorePostWithoutImg, completion: { (error) in
                 if error != nil {
@@ -123,7 +150,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                                 //Database
                                 let firestoreDatabase = Firestore.firestore()
                                 var firestoreRef: DocumentReference? = nil
-                                let firestorePost = ["imageURL" : imageURL!, "postedBy": Auth.auth().currentUser!.email, "tweetContent": self.tweetArea.text!, "tweetDate": FieldValue.serverTimestamp(), "likes" : 0] as [String: Any]
+                                let firestorePost = ["imageURL" : imageURL!, "postedByName": self.currentUserName, "postedByEmail": Auth.auth().currentUser!.email, "postedByNickName": self.currentUserNickName, "tweetContent": self.tweetArea.text!, "tweetDate": FieldValue.serverTimestamp(), "likes" : 0] as [String: Any]
                                 
                                 firestoreRef = firestoreDatabase.collection("Tweets").addDocument(data: firestorePost, completion: { (error) in
                                     if error != nil {

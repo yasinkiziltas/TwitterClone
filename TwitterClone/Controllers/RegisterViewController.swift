@@ -70,18 +70,19 @@ class RegisterViewController: UIViewController {
     
     @objc func donePressed() {
         let currentDate = Date()
+        print(currentDate)
         let dateFormatter = DateFormatter()
         dateFormatter.dateStyle = .medium
         dateFormatter.timeStyle = .none
         
         self.birthdayField.text = dateFormatter.string(from:datePicker.date)
-        dateFormatter.dateFormat = "dd.MM.yyyy" // Doğum tarihinizin formatına uygun şekilde burayı ayarlayın
+        dateFormatter.dateFormat = "dd.MM.yyyy"
         guard let birthday = dateFormatter.date(from: birthdayField.text ?? "") else {
             self.makeAlert(title: "Ops!", message: "Geçersiz format!")
             return
         }
 
-        if birthday > currentDate {
+        if birthday >= currentDate {
             self.makeAlert(title: "Ops!", message: "Uyarı: Doğum tarihi bugünden daha ileri bir tarihtir.")
             birthdayField.text = ""
         }

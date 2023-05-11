@@ -16,6 +16,7 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
     var documentIdArray = [String]()
     var userEmailArray = [String]()
     var userNameArray = [String]()
+    var userNickNameArray = [String]()
     var userTweetArray = [String]()
     var userTweetLikeArray = [Int]()
     var userTweetImgArray = [String]()
@@ -67,10 +68,21 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
                                self.userTweetArray.append(tweetContent)
                            }
                            
-                           if let postedBy = document.get("postedBy") as? String {
-                               self.userEmailArray.append(postedBy)
+                           
+                           if let postedByName = document.get("postedByName") as? String {
+                               self.userNameArray.append(postedByName)
                            }
                            
+                           if let postedByEmail = document.get("postedByEmail") as? String {
+                               self.userEmailArray.append(postedByEmail)
+                           }
+                           
+                           
+                           if let postedByNickName = document.get("postedByNickName") as? String {
+                               self.userNickNameArray.append(postedByNickName)
+                           }
+                           
+
                            if let likes = document.get("likes") as? Int {
                                self.userTweetLikeArray.append(likes)
                            }
@@ -106,8 +118,8 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
             cell.documentIdLabel.text = documentIdArray[indexPath.row]
             let documentID = documentIdArray[indexPath.row]
             cell.configureCell(documentID: documentID)
-            cell.postedbyName.text = "User"
-            cell.postedByEmail.text = "@\(userEmailArray[indexPath.row])"
+            cell.postedbyName.text = userNameArray[indexPath.row]
+            cell.postedByEmail.text = "@\(userNickNameArray[indexPath.row])"
             cell.profileImg.image = UIImage(named: "apple.png")
             cell.postImg.sd_setImage(with: URL(string: self.userTweetImgArray[indexPath.row]))
             cell.commentLabel.text = userTweetArray[indexPath.row]
