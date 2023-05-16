@@ -26,9 +26,10 @@ class ProfileViewController: UIViewController {
         if currentUser != nil {
             do {
                 try Auth.auth().signOut()
+                try Auth.auth().useUserAccessGroup(nil)
                 self.performSegue(withIdentifier: "toSplashScreen", sender: nil)
-            } catch {
-                print("Error")
+            } catch let signOutError as NSError {
+                print("Error: %@", signOutError)
             }
         }
     }

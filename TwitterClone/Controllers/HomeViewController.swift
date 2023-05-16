@@ -13,6 +13,7 @@ import SkeletonView
 class HomeViewController: UIViewController, SkeletonTableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var addBtn: UIButton!
     var documentIdArray = [String]()
     var userEmailArray = [String]()
     var userNameArray = [String]()
@@ -27,6 +28,7 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addBtn.isHidden = true
         self.navigationItem.setHidesBackButton(true, animated: true)
         tableView.rowHeight = 400
         tableView.estimatedRowHeight = 350
@@ -43,6 +45,11 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
         getDataFromFirebase()
     }
     
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        self.tableView.reloadData()
+//    }
+//
     func getDataFromFirebase() {
         tableView.isSkeletonable = true
         tableView.showAnimatedGradientSkeleton(usingGradient: .init(baseColor: .gray), animation: nil, transition: .crossDissolve(0.25))
@@ -55,10 +62,12 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
                } else {
                    if snapshot?.isEmpty != true {
                        self.documentIdArray.removeAll(keepingCapacity: false)
-                       self.userTweetArray.removeAll(keepingCapacity: false)
                        self.userEmailArray.removeAll(keepingCapacity: false)
-                       self.userTweetImgArray.removeAll(keepingCapacity: false)
+                       self.userNameArray.removeAll(keepingCapacity: false)
+                       self.userNickNameArray.removeAll(keepingCapacity: false)
+                       self.userTweetArray.removeAll(keepingCapacity: false)
                        self.userTweetLikeArray.removeAll(keepingCapacity: false)
+                       self.userTweetImgArray.removeAll(keepingCapacity: false)
                        
                        for document in snapshot!.documents {
                          let documentID = document.documentID
@@ -67,7 +76,6 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
                            if let tweetContent = document.get("tweetContent") as? String {
                                self.userTweetArray.append(tweetContent)
                            }
-                           
                            
                            if let postedByName = document.get("postedByName") as? String {
                                self.userNameArray.append(postedByName)
@@ -82,7 +90,6 @@ class HomeViewController: UIViewController, SkeletonTableViewDataSource {
                                self.userNickNameArray.append(postedByNickName)
                            }
                            
-
                            if let likes = document.get("likes") as? Int {
                                self.userTweetLikeArray.append(likes)
                            }

@@ -34,6 +34,8 @@ class FeedCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         likeBtn.setImage(self.image, for: .normal)
+        postedbyName.minimumScaleFactor = 0.5
+        postedByEmail.minimumScaleFactor = 0.5
     }
     
     func configureCell(documentID: String) {

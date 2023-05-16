@@ -17,6 +17,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
+    let firestoreDB = Firestore.firestore()
     let placeholderLabel = UILabel()
     let currentUser = Auth.auth().currentUser?.uid
     let cUser = Auth.auth().currentUser
@@ -31,7 +32,6 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
         
         btnAccesibility.backgroundColor = .clear
         btnAccesibility.layer.cornerRadius = 15
-        
         
         imgView.isUserInteractionEnabled = true
         stopSpinner()
@@ -71,9 +71,8 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
     }
     
     func getUserInfo() {
-        let db = Firestore.firestore()
-        let usersRef = db.collection("Users")
-        let tweetRef = db.collection("Tweets")
+        let usersRef = firestoreDB.collection("Users")
+        let tweetRef = firestoreDB.collection("Tweets")
         
         usersRef.getDocuments{(querySnapshot, error) in
             if let error = error {
@@ -87,6 +86,8 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                         let cUserNickName = document.get("userName") as! String
                         self.currentUserNickName = cUserNickName
                         self.currentUserName = cUserName
+                        print(self.currentUserName)
+                        print(self.currentUserNickName)
                     }
                 }
             }
@@ -100,7 +101,6 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
             makeAlert(titleInput: "OK", messageInput: "You must enter a tweet!")
         } else {
         if imgView.image == nil {
-            let firestoreDB = Firestore.firestore()
             var firestoreRf: DocumentReference? = nil
             
            
@@ -111,7 +111,7 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                     self.stopSpinner()
                     self.makeAlert(titleInput: "ERROR", messageInput: error?.localizedDescription ?? "Error")
                 } else {
-                    let existingCollectionRef = firestoreDB.collection("Tweets")
+                    let existingCollectionRef = self.firestoreDB.collection("Tweets")
                     let existingDocRef = existingCollectionRef.document(firestoreRf?.documentID ?? "")
 
                     let newSubcollectionRef = existingDocRef.collection("tweetLikes")
@@ -121,7 +121,9 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                         "userID": "",
                         "timestamp": ""
                     ])
-                    self.dismiss(animated: true, completion: nil)
+                    self.makeAlert(titleInput: "Success", messageInput: "Success added tweet!")
+                    //self.performSegue(withIdentifier: "goBack", sender: nil)
+                    //self.dismiss(animated: true, completion: nil)
                     self.stopSpinner()
                 }
             })
