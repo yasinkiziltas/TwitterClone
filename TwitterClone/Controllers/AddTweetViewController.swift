@@ -169,7 +169,9 @@ class AddTweetViewController: UIViewController, UITextViewDelegate, UIImagePicke
                                             "userID": "",
                                             "timestamp": ""
                                         ])
-                                        self.dismiss(animated: true, completion: nil)
+                                        self.makeAlert(titleInput: "Success", messageInput: "Success added tweet!")
+                                        //self.performSegue(withIdentifier: "goBack", sender: nil)
+                                        //self.dismiss(animated: true, completion: nil)
                                         self.stopSpinner()
                                     }
                                 })
